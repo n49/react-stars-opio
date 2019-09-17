@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -8,11 +8,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
+var _propTypes = require("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -25,20 +25,20 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var parentStyles = {
-  overflow: 'hidden',
-  position: 'relative'
+  overflow: "hidden",
+  position: "relative"
 };
 
 var defaultStyles = {
-  position: 'relative',
-  overflow: 'hidden',
-  cursor: 'pointer',
-  display: 'block',
-  float: 'left'
+  position: "relative",
+  overflow: "hidden",
+  cursor: "pointer",
+  display: "block",
+  float: "left"
 };
 
 var getHalfStarStyles = function getHalfStarStyles(color, uniqueness) {
-  return '\n    .react-stars-' + uniqueness + ':before {\n      position: absolute;\n      overflow: hidden;\n      display: block;\n      z-index: 1;\n      top: 0; left: 0;\n      width: 50%;\n      content: attr(data-forhalf);\n      color: ' + color + ';\n  }';
+  return "\n    .react-stars-" + uniqueness + ":before {\n      position: absolute;\n      overflow: hidden;\n      display: block;\n      z-index: 1;\n      top: 0; left: 0;\n      width: 50%;\n      content: attr(data-forhalf);\n      color: " + color + ";\n  }";
 };
 
 var ReactStars = function (_Component) {
@@ -54,7 +54,7 @@ var ReactStars = function (_Component) {
     props = _extends({}, props);
 
     _this.state = {
-      uniqueness: (Math.random() + '').replace('.', ''),
+      uniqueness: (Math.random() + "").replace(".", ""),
       value: props.value || 0,
       stars: [],
       halfStar: {
@@ -72,21 +72,21 @@ var ReactStars = function (_Component) {
       // color of an active star
       color2: props.color2,
       half: props.half,
-      edit: props.edit
+      edit: props.edit,
+      readonly: props.readonly
     };
-
     return _this;
   }
 
   _createClass(ReactStars, [{
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {
       this.setState({
         stars: this.getStars(this.state.value)
       });
     }
   }, {
-    key: 'componentWillReceiveProps',
+    key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(props) {
       this.setState({
         stars: this.getStars(props.value),
@@ -94,16 +94,26 @@ var ReactStars = function (_Component) {
         halfStar: {
           at: Math.floor(props.value),
           hidden: this.state.config.half && props.value % 1 < 0.5
-        }
+        },
+        config: _extends({}, this.state.config, {
+          count: props.count,
+          size: props.size,
+          char: props.char,
+          color1: props.color1,
+          color2: props.color2,
+          half: props.half,
+          edit: props.edit,
+          readonly: props.readonly
+        })
       });
     }
   }, {
-    key: 'isDecimal',
+    key: "isDecimal",
     value: function isDecimal(value) {
       return value % 1 !== 0;
     }
   }, {
-    key: 'getRate',
+    key: "getRate",
     value: function getRate() {
       var stars = void 0;
       if (this.state.config.half) {
@@ -114,9 +124,9 @@ var ReactStars = function (_Component) {
       return stars;
     }
   }, {
-    key: 'getStars',
+    key: "getStars",
     value: function getStars(activeCount) {
-      if (typeof activeCount === 'undefined') {
+      if (typeof activeCount === "undefined") {
         activeCount = this.getRate();
       }
       var stars = [];
@@ -128,14 +138,14 @@ var ReactStars = function (_Component) {
       return stars;
     }
   }, {
-    key: 'mouseOver',
+    key: "mouseOver",
     value: function mouseOver(event) {
       var _state = this.state,
           config = _state.config,
           halfStar = _state.halfStar;
 
       if (!config.edit) return;
-      var index = Number(event.target.getAttribute('data-index'));
+      var index = Number(event.target.getAttribute("data-index"));
       if (config.half) {
         var isAtHalf = this.moreThanHalf(event, config.size);
         halfStar.hidden = isAtHalf;
@@ -149,7 +159,7 @@ var ReactStars = function (_Component) {
       });
     }
   }, {
-    key: 'moreThanHalf',
+    key: "moreThanHalf",
     value: function moreThanHalf(event, size) {
       var target = event.target;
 
@@ -158,7 +168,7 @@ var ReactStars = function (_Component) {
       return mouseAt > size / 2;
     }
   }, {
-    key: 'mouseLeave',
+    key: "mouseLeave",
     value: function mouseLeave() {
       var _state2 = this.state,
           value = _state2.value,
@@ -175,20 +185,20 @@ var ReactStars = function (_Component) {
       });
     }
   }, {
-    key: 'clicked',
+    key: "clicked",
     value: function clicked(event) {
       var _state3 = this.state,
           config = _state3.config,
           halfStar = _state3.halfStar;
 
       if (!config.edit) return;
-      var index = Number(event.target.getAttribute('data-index'));
+      var index = Number(event.target.getAttribute("data-index"));
       var value = void 0;
       if (config.half) {
         var isAtHalf = this.moreThanHalf(event, config.size);
         halfStar.hidden = isAtHalf;
         if (isAtHalf) index = index + 1;
-        value = isAtHalf ? index : index + .5;
+        value = isAtHalf ? index : index + 0.5;
         halfStar.at = index;
       } else {
         value = index = index + 1;
@@ -200,18 +210,20 @@ var ReactStars = function (_Component) {
       this.props.onChange(value);
     }
   }, {
-    key: 'renderHalfStarStyleElement',
+    key: "renderHalfStarStyleElement",
     value: function renderHalfStarStyleElement() {
       var _state4 = this.state,
           config = _state4.config,
           uniqueness = _state4.uniqueness;
 
-      return _react2.default.createElement('style', { dangerouslySetInnerHTML: {
+      return _react2.default.createElement("style", {
+        dangerouslySetInnerHTML: {
           __html: getHalfStarStyles(config.color2, uniqueness)
-        } });
+        }
+      });
     }
   }, {
-    key: 'renderStars',
+    key: "renderStars",
     value: function renderStars() {
       var _this2 = this;
 
@@ -225,44 +237,46 @@ var ReactStars = function (_Component) {
           size = config.size,
           char = config.char,
           half = config.half,
-          edit = config.edit;
+          edit = config.edit,
+          readonly = config.readonly;
 
       return stars.map(function (star, i) {
-        var starClass = '';
+        var starClass = "";
         if (half && !halfStar.hidden && halfStar.at === i) {
-          starClass = 'react-stars-' + uniqueness;
+          starClass = "react-stars-" + uniqueness;
         }
         var style = _extends({}, defaultStyles, {
           color: star.active ? color2 : color1,
-          cursor: edit ? 'pointer' : 'default',
-          fontSize: size + 'px'
+          cursor: edit || readonly ? "pointer" : "default",
+          fontSize: size + "px"
         });
         return _react2.default.createElement(
-          'span',
+          "span",
           {
             className: starClass,
             style: style,
             key: i,
-            'data-index': i,
-            'data-forhalf': char,
+            "data-index": i,
+            "data-forhalf": char,
             onMouseOver: _this2.mouseOver.bind(_this2),
             onMouseMove: _this2.mouseOver.bind(_this2),
             onMouseLeave: _this2.mouseLeave.bind(_this2),
-            onClick: _this2.clicked.bind(_this2) },
+            onClick: _this2.clicked.bind(_this2)
+          },
           char
         );
       });
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var className = this.props.className;
 
 
       return _react2.default.createElement(
-        'div',
+        "div",
         { className: className, style: parentStyles },
-        this.state.config.half ? this.renderHalfStarStyleElement() : '',
+        this.state.config.half ? this.renderHalfStarStyleElement() : "",
         this.renderStars()
       );
     }
@@ -280,7 +294,8 @@ ReactStars.propTypes = {
   char: _propTypes2.default.string,
   size: _propTypes2.default.number,
   color1: _propTypes2.default.string,
-  color2: _propTypes2.default.string
+  color2: _propTypes2.default.string,
+  readonly: _propTypes2.default.bool
 };
 
 ReactStars.defaultProps = {
@@ -288,10 +303,11 @@ ReactStars.defaultProps = {
   half: true,
   value: 0,
   count: 5,
-  char: '★',
+  char: "★",
   size: 15,
-  color1: 'gray',
-  color2: '#ffd700',
+  color1: "gray",
+  color2: "#ffd700",
+  readonly: false,
 
   onChange: function onChange() {}
 };
